@@ -24,15 +24,11 @@ export default function App() {
     const url = `repositories/${id}/like`;
     const response = await api.post(url);
     const repository = response.data;
-    console.log(repository);
-
     const repositoryIndex = repositories.findIndex(repository => repository.id === id);
 
     repositories[repositoryIndex] = repository;
-    console.log(repositories[repositoryIndex]);
 
     setRepositories([...repositories]);
-
   }
 
   return (
@@ -43,26 +39,22 @@ export default function App() {
         data={repositories}
         KeyExtractor={repository => repository.id}
         renderItem={({item:repository}) => (
-        <View style={styles.repositoryContainer}>
-          <Text style={styles.repository}>{repository.title}</Text>
-          <View style={styles.techsContainer}>
+        <View key={`view-1-${repository.id}`} style={styles.repositoryContainer}>
+          <Text key={`text-repo-${repository.id}`} style={styles.repository}>{repository.title}</Text>
+          <View key={`view-2-${repository.id}`} style={styles.techsContainer}>
           {repository.techs.map(tech => (
-          <View >
-            <Text key={`techs -${Math.floor(100*Math.random())} - ${repository.id}`} style={styles.tech}>
+          <View key={`${Math.floor(100*Math.random())}`} >
+            <Text key={`${Math.floor(100*Math.random())}`} style={styles.tech}>
               {tech}
             </Text>
-            {/* <Text style={styles.tech}>
-              Node.js
-            </Text> */}
           </View>
           ))}</View>
           
 
-          <View style={styles.likesContainer}>
+          <View key={`view-4-${repository.id}`} style={styles.likesContainer}>
             <Text
               style={styles.likeText}
-              // Remember to replace "1" below with repository ID: {`repository-likes-${repository.id}`}
-              key={`repository-likes-${Math.floor(100*Math.random())} - ${repository.id}`}
+              key={`repository-likes-${repository.id}`}
             >
               {repository.likes} {repository.likes === 1 ? 'curtida' : 'curtidas'}
             </Text>
@@ -72,9 +64,9 @@ export default function App() {
             style={styles.button}
             onPress={() => handleLikeRepository(repository.id)}
             // Remember to replace "1" below with repository ID: {`like-button-${repository.id}`}
-            testID={`like-button- ${Math.floor(100*Math.random())} - ${repository.id}`}
+            key={`like-button- ${repository.id}`}
           >
-            <Text style={styles.buttonText}>Curtir</Text>
+            <Text key={`text-button - ${repository.id}`} style={styles.buttonText}>Curtir</Text>
           </TouchableOpacity>
         </View>
         )}

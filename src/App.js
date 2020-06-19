@@ -55,7 +55,7 @@ export default function App() {
             <Text
               style={styles.likeText}
               key={`repository-likes-${repository.id}`}
-              testID={`repository-likes-1-${repository.id}`}
+              testID={`repository-likes-${repository.id}`}
             >
               {repository.likes} {repository.likes === 1 ? 'curtida' : 'curtidas'}
             </Text>
@@ -66,7 +66,7 @@ export default function App() {
             onPress={() => handleLikeRepository(repository.id)}
             // Remember to replace "1" below with repository ID: {`like-button-${repository.id}`}
             key={`like-button- ${repository.id}`}
-            testID={`like-button-1-${repository.id}`}
+            testID={`like-button-${repository.id}`}
           >
             <Text key={`text-button - ${repository.id}`} style={styles.buttonText}>Curtir</Text>
           </TouchableOpacity>
